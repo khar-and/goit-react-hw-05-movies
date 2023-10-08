@@ -2,7 +2,6 @@ import { fetchTrendingMovies } from 'api/fetch';
 import Loader from 'components/Loader/Loader';
 import MoviesList from 'components/MoviesList/MoviesList';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
