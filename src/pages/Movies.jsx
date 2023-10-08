@@ -12,7 +12,6 @@ const Movies = () => {
     try {
       setIsLoading(true);
       const data = await fetchMovieBySearchName(searchName);
-      console.log(data);
       setMovies(data);
     } catch {
       alert('Something went wrong!');
