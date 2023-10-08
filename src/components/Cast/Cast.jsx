@@ -1,5 +1,6 @@
 import { fetchCast } from 'api/fetch';
 import { getPoster } from 'api/getPoster';
+import Loader from 'components/Loader/Loader';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -15,6 +16,7 @@ const Cast = () => {
         const data = await fetchCast(movieId);
         setCast(data);
       } catch {
+        alert('Something went wrong!');
       } finally {
         setIsLoading(false);
       }
@@ -24,7 +26,7 @@ const Cast = () => {
   }, [movieId]);
   return (
     <div>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Loader />}
 
       <ul>
         {cast.map(({ id, profile_path, original_name, name, character }) => (

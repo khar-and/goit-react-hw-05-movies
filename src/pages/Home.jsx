@@ -1,6 +1,8 @@
 import { fetchTrendingMovies } from 'api/fetch';
+import Loader from 'components/Loader/Loader';
+import MoviesList from 'components/MoviesList/MoviesList';
 import { useEffect, useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,6 +20,7 @@ const Home = () => {
       const data = await fetchTrendingMovies();
       setMovies(data);
     } catch {
+      alert('Something went wrong!');
     } finally {
       setIsLoading(false);
     }
@@ -26,18 +29,8 @@ const Home = () => {
   return (
     <div>
       <h1>Trending Today</h1>
-      {isLoading && <p>Loading...</p>}
-      {movies.map(movie => {
-        return (
-          <ul>
-            <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-                {`${movie.title}`}
-              </Link>
-            </li>
-          </ul>
-        );
-      })}
+      {isLoading && <Loader />}
+      <MoviesList movies={movies} />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { fetchMovieDetails } from 'api/fetch';
 import { getPoster } from 'api/getPoster';
+import Loader from 'components/Loader/Loader';
 import React, { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
@@ -15,6 +16,7 @@ const MovieDetails = () => {
         const data = await fetchMovieDetails(movieId);
         setMovieInfo(data);
       } catch {
+        alert('Something went wrong!');
       } finally {
         setIsLoading(false);
       }
@@ -30,7 +32,7 @@ const MovieDetails = () => {
   return (
     <div>
       <Link to={location.state?.from ?? '/'}>Go back</Link>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Loader />}
       {movieInfo && (
         <div>
           <img src={getPoster(poster_path)} alt="poster" width={300} />
