@@ -8,8 +8,6 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
 
-  const location = useLocation();
-
   useEffect(() => {
     handleAddTrendingMovies();
   }, []);
