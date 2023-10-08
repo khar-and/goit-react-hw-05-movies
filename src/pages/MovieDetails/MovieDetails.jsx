@@ -1,7 +1,7 @@
 import { fetchMovieDetails } from 'api/fetch';
 import { getPoster } from 'api/getPoster';
 import Loader from 'components/Loader/Loader';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import {
   Button,
@@ -12,10 +12,14 @@ import {
 } from './MovieDetails.styled';
 
 const MovieDetails = () => {
+  const location = useLocation();
+  const backLinkLocation = useRef(location.state?.from ?? '/');
+  console.log(backLinkLocation);
   //   для роботи з динамічними параметрами запиту використовуємо хук useParams
   const { movieId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [movieInfo, setMovieInfo] = useState(null);
+
   useEffect(() => {
     const handleAddMoviesById = async () => {
       try {
@@ -31,14 +35,13 @@ const MovieDetails = () => {
     handleAddMoviesById();
   }, [movieId]);
 
-  const location = useLocation();
   // Із useParams отримуємо значення параметра. і в юзеффекті робимо відповідний запит по цьому значенню. А далі рендеримо всю отриману інфу.
 
   const { title, release_date, popularity, overview, genres, poster_path } =
     movieInfo || {};
   return (
     <div>
-      <Link to={location.state?.from ?? '/'}>
+      <Link to={backLinkLocation.current}>
         <Button type="button">Go back</Button>
       </Link>
       {isLoading && <Loader />}
@@ -72,7 +75,9 @@ const MovieDetails = () => {
         </li>
       </ListInfo>
       <hr />
-      <Outlet />
+      <Suspense>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };
