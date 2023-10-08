@@ -6,11 +6,11 @@ const MoviesList = ({ movies }) => {
 
   return (
     <List>
-      {movies.map(movie => {
+      {movies.map(({ id, title }) => {
         return (
-          <Item key={movie.id}>
-            <MovieLink to={`/movies/${movie.id}`} state={{ from: location }}>
-              {movie.title}
+          <Item key={id}>
+            <MovieLink to={`/movies/${id}`} state={{ from: location }}>
+              {title}
             </MovieLink>
           </Item>
         );

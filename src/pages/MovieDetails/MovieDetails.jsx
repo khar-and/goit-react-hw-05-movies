@@ -13,7 +13,10 @@ import {
 
 const MovieDetails = () => {
   const location = useLocation();
-  const backLinkLocation = useRef(location.state?.from ?? '/');
+  console.log(location);
+  const backLinkLocation = useRef(location.state?.from ?? '/movies');
+  // const backLinkLocation = location.state?.from ?? '/movies';
+  console.log(backLinkLocation);
 
   //   для роботи з динамічними параметрами запиту використовуємо хук useParams
   const { movieId } = useParams();
