@@ -14,7 +14,7 @@ import {
 const MovieDetails = () => {
   const location = useLocation();
   const backLinkLocation = useRef(location.state?.from ?? '/');
-  console.log(backLinkLocation);
+
   //   для роботи з динамічними параметрами запиту використовуємо хук useParams
   const { movieId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
