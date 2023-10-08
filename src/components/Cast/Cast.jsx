@@ -3,6 +3,7 @@ import { getPoster } from 'api/getPoster';
 import Loader from 'components/Loader/Loader';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { List, Text } from './Cast.styled';
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -28,7 +29,7 @@ const Cast = () => {
     <div>
       {isLoading && <Loader />}
 
-      <ul>
+      <List>
         {cast.map(({ id, profile_path, original_name, name, character }) => (
           <li key={id}>
             <img
@@ -36,11 +37,11 @@ const Cast = () => {
               src={getPoster(profile_path)}
               alt={original_name}
             />
-            <p>{name}</p>
-            <p>Character: {character}</p>
+            <Text>{name}</Text>
+            <Text>Character: {character}</Text>
           </li>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };

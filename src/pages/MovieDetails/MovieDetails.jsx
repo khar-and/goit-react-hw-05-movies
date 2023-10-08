@@ -3,6 +3,13 @@ import { getPoster } from 'api/getPoster';
 import Loader from 'components/Loader/Loader';
 import React, { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import {
+  Button,
+  Container,
+  LinkInfo,
+  List,
+  ListInfo,
+} from './MovieDetails.styled';
 
 const MovieDetails = () => {
   //   для роботи з динамічними параметрами запиту використовуємо хук useParams
@@ -31,10 +38,12 @@ const MovieDetails = () => {
     movieInfo || {};
   return (
     <div>
-      <Link to={location.state?.from ?? '/'}>Go back</Link>
+      <Link to={location.state?.from ?? '/'}>
+        <Button type="button">Go back</Button>
+      </Link>
       {isLoading && <Loader />}
       {movieInfo && (
-        <div>
+        <Container>
           <img src={getPoster(poster_path)} alt="poster" width={300} />
           <div>
             <h1>
@@ -46,22 +55,23 @@ const MovieDetails = () => {
             <h2>Genres</h2>
             <ul>
               {genres.map(genre => (
-                <li key={genre.id}>{genre.name}</li>
+                <List key={genre.id}>{genre.name}</List>
               ))}
             </ul>
           </div>
-        </div>
+        </Container>
       )}
-
+      <hr />
       <h3>Additional information</h3>
-      <ul>
+      <ListInfo>
         <li>
-          <Link to="cast">Cast</Link>
+          <LinkInfo to="cast">Cast</LinkInfo>
         </li>
         <li>
-          <Link to="reviews"> Reviews</Link>
+          <LinkInfo to="reviews"> Reviews</LinkInfo>
         </li>
-      </ul>
+      </ListInfo>
+      <hr />
       <Outlet />
     </div>
   );

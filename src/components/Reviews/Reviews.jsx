@@ -2,6 +2,7 @@ import { fetchReviews } from 'api/fetch';
 import Loader from 'components/Loader/Loader';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { List } from './Reviews.styled';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -30,14 +31,14 @@ const Reviews = () => {
       {isLoading && <Loader />}
       {reviews.length !== 0 && (
         <div>
-          <ul>
+          <List>
             {reviews.map(review => (
               <li key={review.id}>
                 <h2>Author: {review.author}</h2>
                 <p>{review.content}</p>
               </li>
             ))}
-          </ul>
+          </List>
         </div>
       )}
       {reviews.length === 0 && (

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button, Input, SearchForm } from './Form.styled';
 
 const Form = ({ onSubmit }) => {
   const [searchName, setSearchName] = useState('');
@@ -20,15 +21,15 @@ const Form = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={hendleSubmitForm}>
-      <input
+    <SearchForm onSubmit={hendleSubmitForm}>
+      <Input
         type="text"
         autoFocus
         onChange={hendleInputChange}
         value={searchName}
       />
-      <button type="submit">Search</button>
-    </form>
+      <Button type="submit">Search</Button>
+    </SearchForm>
   );
 };
 
