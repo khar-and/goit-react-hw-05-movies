@@ -35,9 +35,10 @@ export const fetchCast = async movieId => {
 };
 
 // Запит інформації по пошуку фільму
-export const fetchMovieBySearchName = async searchName => {
-  const response = await axios.get(
-    `search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${searchName}`
+export const getMovieByQuery = async query => {
+  const { data } = await axios.get(
+    `search/movie?api_key=${API_KEY}&query=${query}&language=en-US&page=1&include_adult=false`
   );
-  return response.data.results;
+
+  return data.results;
 };

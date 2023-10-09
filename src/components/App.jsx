@@ -19,6 +19,8 @@ const App = () => {
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
           </Route>
+          {/* Якщо сторінка не існує - перехід на іншу (в даному випадку на Home) */}
+          <Route path="*" element={<Home />} />
         </Route>
       </Routes>
     </div>
